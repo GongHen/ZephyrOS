@@ -1,0 +1,5 @@
+board:
+  name: stm32f4_atk_explorer
+  vendor: st
+  socs:
+    - name: stm32f407xx

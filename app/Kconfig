@@ -6,10 +6,17 @@
 # You can browse these options using the west targets menuconfig (terminal) or
 # guiconfig (GUI).
 
+rsource "src/modules/Kconfig.util_module"
+rsource "src/modules/Kconfig.modules_common"
+
+rsource "src/watchdog/Kconfig"
+rsource "src/events/Kconfig"
+
 menu "Zephyr"
 source "Kconfig.zephyr"
 endmenu
 
-module = APP
-module-str = APP
+
+module = APP_MODULE
+module-str = app module
 source "subsys/logging/Kconfig.template.log_config"

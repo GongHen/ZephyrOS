@@ -4,7 +4,7 @@
 # Copyright (c) 2021 Nordic Semiconductor ASA
 # SPDX-License-Identifier: Apache-2.0
 
-cmake_minimum_required(VERSION 3.13.1)
+cmake_minimum_required(VERSION 3.20.0)
 
 list(APPEND BOARD_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/) # new add, set BOARD_ROOT.
 
@@ -13,6 +13,27 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(app LANGUAGES C)
 
 target_sources(app PRIVATE src/main.c)
+
+
+target_sources(app PRIVATE
+		src/modules/util_module.c
+		src/modules/modules_common.c
+)
+
+target_sources(app PRIVATE
+		src/events/util_module_event.c
+)
+
+# target_sources(app PRIVATE
+# )
+
+zephyr_library_include_directories(src/modules)
+zephyr_library_include_directories(src/Algorithm)
+zephyr_library_include_directories(src/events)
+
+zephyr_library_include_directories(${ZEPHYR_BASE}/drivers/flash)
+
+add_subdirectory_ifdef(CONFIG_WATCHDOG_APPLICATION src/watchdog)
 
 # exec_program(
 #     "git"

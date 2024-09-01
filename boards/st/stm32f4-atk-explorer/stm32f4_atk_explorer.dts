@@ -58,6 +58,7 @@
 		led3 = &blue_led_6;
 		sw0 = &user_button;
 		watchdog0 = &iwdg;
+		eeprom-0 = &eeprom0;
 	};
 };
 
@@ -169,7 +170,7 @@ zephyr_udc0: &usbotg_fs {
 };
 
 &i2c1 {
-	pinctrl-0 = <&i2c1_scl_pb6 &i2c1_sda_pb7>;
+	pinctrl-0 = <&i2c1_scl_pb8 &i2c1_sda_pb9>;
 	pinctrl-names = "default";
 	status = "okay";
 	clock-frequency = <I2C_BITRATE_FAST>;
@@ -213,9 +214,6 @@ zephyr_udc0: &usbotg_fs {
 		size = <134217728>;
 	};
 };
-
-
-
 
 
 &iwdg {

@@ -18,6 +18,7 @@ target_sources(app PRIVATE src/main.c)
 target_sources(app PRIVATE
 		src/modules/util_module.c
 		src/modules/modules_common.c
+        src/modules/flash_module.c
 )
 
 target_sources(app PRIVATE

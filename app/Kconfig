@@ -8,6 +8,7 @@
 
 rsource "src/modules/Kconfig.util_module"
 rsource "src/modules/Kconfig.modules_common"
+rsource "src/modules/Kconfig.flash_module"
 
 rsource "src/watchdog/Kconfig"
 rsource "src/events/Kconfig"

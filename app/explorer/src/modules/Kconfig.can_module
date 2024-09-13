@@ -11,7 +11,7 @@ if CAN_MODULE
 
 config CAN_THREAD_STACK_SIZE
 	int "Can module thread stack size"
-	default 1024 
+	default 4096 
 
 endif # CAN_MODULE
 

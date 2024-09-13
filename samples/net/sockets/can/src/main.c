@@ -5,19 +5,14 @@
  */
 
 #include <zephyr/logging/log.h>
+LOG_MODULE_REGISTER(net_socket_can_sample, LOG_LEVEL_DBG);
 
 #include <zephyr/kernel.h>
+
 #include <zephyr/drivers/can.h>
 #include <zephyr/net/socket.h>
 #include <zephyr/net/socketcan.h>
 #include <zephyr/net/socketcan_utils.h>
-
-/* Module name is used by the Application Event Manager macros in this file */
-#define MODULE can_module
-
-#include "modules_common.h"
-
-LOG_MODULE_REGISTER(MODULE, CONFIG_CAN_MODULE_LOG_LEVEL);
 
 #define PRIORITY  k_thread_priority_get(k_current_get())
 #define STACKSIZE 1024
@@ -265,7 +260,7 @@ cleanup:
 	return ret;
 }
 
-void can_module_thread_fn(void)
+int main(void)
 {
 	const struct device *dev = DEVICE_DT_GET(DT_CHOSEN(zephyr_canbus));
 	int ret;
@@ -275,14 +270,14 @@ void can_module_thread_fn(void)
 	ret = can_set_mode(dev, CAN_MODE_LOOPBACK);
 	if (ret != 0) {
 		LOG_ERR("Cannot set CAN loopback mode (%d)", ret);
-		return ;
+		return 0;
 	}
 #endif
 
 	ret = can_start(dev);
 	if (ret != 0) {
 		LOG_ERR("Cannot start CAN controller (%d)", ret);
-		return ;
+		return 0;
 	}
 
 	/* Let the device start before doing anything */
@@ -291,13 +286,9 @@ void can_module_thread_fn(void)
 	fd = setup_socket();
 	if (fd < 0) {
 		LOG_ERR("Cannot start CAN application (%d)", fd);
-		return ;
+		return 0;
 	}
 
 	rx(INT_TO_POINTER(fd), NULL, NULL);
-	return ;
+	return 0;
 }
-
-K_THREAD_DEFINE(can_module_thread, CONFIG_CAN_THREAD_STACK_SIZE,
-		can_module_thread_fn, NULL, NULL, NULL,
-		K_LOWEST_APPLICATION_THREAD_PRIO, 0, 0);

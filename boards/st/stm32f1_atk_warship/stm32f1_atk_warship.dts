@@ -9,7 +9,7 @@
 #include <st/f1/stm32f103r(c-d-e)tx-pinctrl.dtsi>
 
 / {
-	model = "stm32f103_mini board";
+	model = "stm32f103_atk_warship board";
 	compatible = "stm32f103";
 
 	chosen {

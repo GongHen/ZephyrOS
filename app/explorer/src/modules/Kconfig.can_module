@@ -1,0 +1,20 @@
+#
+# Copyright (c) 2021 Nordic Semiconductor
+#
+# SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+#
+menuconfig CAN_MODULE
+	bool "Can module"
+	default y
+
+if CAN_MODULE
+
+config CAN_THREAD_STACK_SIZE
+	int "Can module thread stack size"
+	default 1024 
+
+endif # CAN_MODULE
+
+module = CAN_MODULE
+module-str = can module
+source "subsys/logging/Kconfig.template.log_config"

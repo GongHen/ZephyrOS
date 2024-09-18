@@ -20,7 +20,7 @@ FILE(GLOB app_sources src/*.c)
 target_sources(app PRIVATE
 		src/modules/util_module.c
 		src/modules/modules_common.c
-        # src/modules/flash_module.c
+        src/modules/flash_module.c
         src/modules/socket_can_module.c
 )
 
